@@ -1,5 +1,7 @@
 {
   "name": "SimulacionAPP",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

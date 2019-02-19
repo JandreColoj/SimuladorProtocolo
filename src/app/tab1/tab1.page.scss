@@ -2,3 +2,48 @@
   max-height: 35vh;
   overflow: hidden;
 }
+
+.consola{
+  min-height: 250px;
+  max-height:250px !important;
+  overflow: scroll !important;
+  background: #0e0d0d !important;
+  color: #86bdaa !important;
+  border-radius: 9px;
+  font-family: monospace;
+  height: xyz;
+  list-style: none;
+  padding-left: 10px; 
+  margin: 10px 20px 5px 10px;
+}
+
+.center{
+  text-align: center;
+  font-weight: 100;
+}
+
+.consola ul{
+  list-style: none;
+}
+
+.titulo{
+  background: #000 !important;
+  color: #a8a8a8;
+}
+
+.destino{
+
+  min-height: 66px;
+  border: solid 1px #292121;
+  border-radius: 7px;
+  padding-top: 20px;
+  color: #fff7f7;
+  min-width: 390px;
+  font-weight: lighter;
+  background: #1f1d1d;
+
+}
+
+.border_frase{
+  border: solid 1px #1f1d1d;
+}
