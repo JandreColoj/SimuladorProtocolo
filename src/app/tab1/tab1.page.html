@@ -1,32 +1,24 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title class="titulo">
-         REDES
+      <ion-title>
+         {{mi_frase}}
       </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-   <ion-card class="border_frase">
-      <ion-item class="center">
-         <ion-label>{{mi_frase}}</ion-label>
-      </ion-item>
-   
-      <ion-card-content>
-         <ion-item class="center">
-            <ion-input placeholder="Ingrese la frase" [(ngModel)]="frase"></ion-input>
-         </ion-item>
-      </ion-card-content>
-   </ion-card>
+   <div class="entrada">
+      <ion-input placeholder="Ingrese la frase" [(ngModel)]="frase"></ion-input>
+   </div>
    
    <ion-grid>
       <ion-row>
          <ion-col class="center">
-            <ion-button color="dark" expand="full" shape="round" (click)='simulacion("A")'>Destino A</ion-button>
+            <ion-button  expand="full" class="btn_A" (click)='simulacion("A")'>Destino A</ion-button>
          </ion-col>
          <ion-col class="center">
-            <ion-button color="dark" expand="full"  shape="round" (click)='simulacion("B")'>Destino B</ion-button>
+            <ion-button   expand="full" class="btn_A" (click)='simulacion("B")'>Destino B</ion-button>
          </ion-col>
       </ion-row>
    </ion-grid> 

@@ -12,9 +12,11 @@ export class Tab1Page {
   registroLog : any;
   fraseArray : any; //Guarda la frase en un array por letra
   auxLog : any; // muestra el resultado en la vista
+  auxfrase : any; // muestra el resultado en el destino
   mi_frase : String;
   mi_fraseA : String;
   mi_fraseB : String;
+   destino : String;
 
    constructor() {
 
@@ -134,6 +136,15 @@ export class Tab1Page {
 
    simulacion(destino){
       
+      this.destino = destino;
+
+      this.auxfrase=[];
+      //guardar frase escrita en un array
+      for (let index = 0; index < this.frase.length; index++) {
+         this.auxfrase.push(this.frase.charAt(index));
+      }
+
+
       this.mi_fraseA = "";
       this.mi_fraseB = "";
 
@@ -147,7 +158,7 @@ export class Tab1Page {
 
       res.forEach(element => {   
 
-         this.registroLog.push(" INICIO DataGrama->"+D);
+         this.registroLog.push(" INICIO DataGrama "+D);
 
          for (let index = 0; index < element.length; index++) {
 
@@ -155,10 +166,10 @@ export class Tab1Page {
             var binario = this.valorBinario(letra);  
             
             if (this.fraseArray[indexLetra]!=letra) {
-               this.registroLog.push(letra+" - D"+D+"P"+index+" -- "+binario+" -----> NK");
+               this.registroLog.push(letra+" - D"+D+"P"+index+" -- "+binario+"-----> NK");
                e++;
             }else{
-               this.registroLog.push(letra+" - D"+D+"P"+index+" -- "+binario+" -----> YS" );
+               this.registroLog.push(letra+" - D"+D+"P"+index+" -- "+binario+"-----> YS" );
                y++;
             }
                    
@@ -166,8 +177,8 @@ export class Tab1Page {
             t++;
          }
 
-         this.registroLog.push(" FIN DataGrama->"+D);
-         this.registroLog.push("******************************");
+         this.registroLog.push(" FIN DataGrama "+D);
+         this.registroLog.push("**************************");
          D++;         
 
       });
@@ -180,19 +191,16 @@ export class Tab1Page {
 
       //recorre el array de respuesta y lo muestra con un retraso de milisegundos
       for (let j = 0; j < this.registroLog.length; j++) {
-        this.motrarResultado(this.registroLog[j],j);
-      }
 
-      if (destino=="A") {
-         this.mi_fraseA = this.frase;
-      }else if("B"){
-         this.mi_fraseB= this.frase;
+         var letra_destino=this.auxfrase[j];
+
+        this.motrarResultado(this.registroLog[j],j,letra_destino);
       }
       
    }
   
    //variable para mostrar resultado en la vista con un retraso de milisegundos
-   motrarResultado(res,j){
+   motrarResultado(res,j,letra){
 
       this.auxLog = [];
       console.log(this.auxLog);
@@ -200,6 +208,17 @@ export class Tab1Page {
       setTimeout(() => {
          this.auxLog.push(res);
          console.log(res);
+
+         if (this.destino=="A") {
+            if (letra!=undefined) {
+               this.mi_fraseA=this.mi_fraseA+letra;
+            }
+           
+         }else if (this.destino=="B") {
+            if (letra!=undefined) {
+               this.mi_fraseB=this.mi_fraseB+letra;
+            }
+         }
       },200*(j+1));
 
    }
