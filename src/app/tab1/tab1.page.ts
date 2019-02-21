@@ -116,6 +116,7 @@ export class Tab1Page {
       }
 
       this.mi_frase = "1 que le dice una IP a otra? que tramas?";
+      this.mi_frase = "<p> Si se puede imaginar, se puede programar </p>";
 
       console.log("Longitud de la frase: "+this.mi_frase.length);
 
@@ -158,7 +159,7 @@ export class Tab1Page {
 
       res.forEach(element => {   
 
-         this.registroLog.push(" INICIO DataGrama "+D);
+         this.registroLog.push("__INICIO D"+D);
 
          for (let index = 0; index < element.length; index++) {
 
@@ -166,10 +167,10 @@ export class Tab1Page {
             var binario = this.valorBinario(letra);  
             
             if (this.fraseArray[indexLetra]!=letra) {
-               this.registroLog.push(letra+" - D"+D+"P"+index+" -- "+binario+"-----> NK");
+               this.registroLog.push(letra+"  D"+D+"P"+(index+1)+" - "+binario+" -----> NK");
                e++;
             }else{
-               this.registroLog.push(letra+" - D"+D+"P"+index+" -- "+binario+"-----> YS" );
+               this.registroLog.push(letra+"  D"+D+"P"+(index+1)+" - "+binario+" -----> YS" );
                y++;
             }
                    
@@ -177,8 +178,9 @@ export class Tab1Page {
             t++;
          }
 
-         this.registroLog.push(" FIN DataGrama "+D);
-         this.registroLog.push("**************************");
+         this.registroLog.push("__FIN D"+D);
+         this.registroLog.push("______________________________");
+         this.registroLog.push(" ");
          D++;         
 
       });

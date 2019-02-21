@@ -26,7 +26,11 @@
    <div class="consola" #scrollMe [scrollTop]="scrollMe.scrollHeight">
       <ul>
          <li *ngFor="let item of auxLog; let i = index">
-            {{item}}
+            <br *ngIf="item==' '">
+            <span [ngClass]="{'red__': item.substr(-2)=='NK'}">
+               {{item}}
+            </span>
+            
          </li>
       </ul>
    </div>
