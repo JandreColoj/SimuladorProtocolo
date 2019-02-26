@@ -10,7 +10,7 @@ export class Tab1Page {
   frase : any;
   letrasBinary : any;
   registroLog : any;
-  fraseArray : any; //Guarda la frase en un array por letra
+  fraseArray : any; //Guarda la frase definida en un array por letra
   auxLog : any; // muestra el resultado en la vista
   auxfrase : any; // muestra el resultado en el destino
   mi_frase : String;
@@ -116,7 +116,7 @@ export class Tab1Page {
       }
 
       this.mi_frase = "1 que le dice una IP a otra? que tramas?";
-      this.mi_frase = "<p> Si se puede imaginar, se puede programar </p>";
+      this.mi_frase = "Si se puede imaginar, se puede programar #1";
 
       console.log("Longitud de la frase: "+this.mi_frase.length);
 
@@ -150,16 +150,19 @@ export class Tab1Page {
       this.mi_fraseB = "";
 
       this.registroLog = [];
-      let res = this.frase.split(" ");
       let D = 1; //datagrama
       let t = 1; // tramas
       let e = 0; // errores
       let y = 0; // exitos
+      let f = 0; // faltantes
       let indexLetra = 0;
+
+      
+      let res = this.frase.split(" ");
 
       res.forEach(element => {   
 
-         this.registroLog.push("__INICIO D"+D);
+         this.registroLog.push("_______INICIO D"+D+"_______");
 
          for (let index = 0; index < element.length; index++) {
 
@@ -169,6 +172,7 @@ export class Tab1Page {
             if (this.fraseArray[indexLetra]!=letra) {
                this.registroLog.push(letra+"  D"+D+"P"+(index+1)+" - "+binario+" -----> NK");
                e++;
+            
             }else{
                this.registroLog.push(letra+"  D"+D+"P"+(index+1)+" - "+binario+" -----> YS" );
                y++;
@@ -178,24 +182,36 @@ export class Tab1Page {
             t++;
          }
 
-         this.registroLog.push("__FIN D"+D);
-         this.registroLog.push("______________________________");
+         this.registroLog.push("________FIN D"+D+"_________");
          this.registroLog.push(" ");
          D++;         
 
       });
 
+      
+      this.registroLog.push("______TRAMAS FALTANTES______");
+
+      if(this.fraseArray.length > indexLetra){
+
+         for (let k = indexLetra; k < this.fraseArray.length; k++) {
+            var binario = this.valorBinario(this.fraseArray[k]);  
+            this.registroLog.push(this.fraseArray[k]+"  D"+D+" - "+binario+" -----> FT" );
+            f++;
+         }
+      }
+
+      this.registroLog.push("____________________________");
+      this.registroLog.push(" ");
+
       this.registroLog.push(" RESUMEN");
       this.registroLog.push(" Total datagramas "+(D-1));
-      this.registroLog.push(" Total tramas "+(t-1));
-      this.registroLog.push(" Total exitosos "+y);
-      this.registroLog.push(" Total errores "+e);
+      this.registroLog.push(" Total tramas     "+(t-1));
+      this.registroLog.push(" Total errores    "+e);
+      this.registroLog.push(" Total faltates   "+f);
 
       //recorre el array de respuesta y lo muestra con un retraso de milisegundos
       for (let j = 0; j < this.registroLog.length; j++) {
-
          var letra_destino=this.auxfrase[j];
-
         this.motrarResultado(this.registroLog[j],j,letra_destino);
       }
       
@@ -205,7 +221,6 @@ export class Tab1Page {
    motrarResultado(res,j,letra){
 
       this.auxLog = [];
-      console.log(this.auxLog);
 
       setTimeout(() => {
          this.auxLog.push(res);
@@ -213,12 +228,12 @@ export class Tab1Page {
 
          if (this.destino=="A") {
             if (letra!=undefined) {
-               this.mi_fraseA=this.mi_fraseA+letra;
+               this.mi_fraseA+=letra;
             }
            
          }else if (this.destino=="B") {
             if (letra!=undefined) {
-               this.mi_fraseB=this.mi_fraseB+letra;
+               this.mi_fraseB+=letra;
             }
          }
       },200*(j+1));
